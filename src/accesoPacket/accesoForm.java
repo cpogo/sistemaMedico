@@ -259,7 +259,7 @@ public  Connection Connection() {
     p.put("user","root");
     //===
 //    p.put("password","1359sss");
-    p.put("password","");
+	    p.put("password","123");
 
     // Now try to connect
     Connection c = DriverManager.getConnection(CONNECTION,p);

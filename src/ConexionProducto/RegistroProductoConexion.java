@@ -36,7 +36,7 @@ public class RegistroProductoConexion {
         try {
             CallableStatement cs = null;
             
-            cs = c.prepareCall("{CALL InsertarProductoNuevo(?,?,?,?,?,?,?,?,?)}");
+            cs = c.prepareCall("{CALL sp_producto_medico_insert(?,?,?,?,?,?,?,?,?)}");
             cs.setString(1, nombre);
             cs.setString(2, marca);
             cs.setString(3, descripcion);

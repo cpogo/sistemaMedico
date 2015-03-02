@@ -26,7 +26,7 @@ public class conexiondb {
     private static final String DB_USER = "root";
 //===
 //    private static final String DB_PASSWORD = "123";
-	private static final String DB_PASSWORD = "";
+	private static final String DB_PASSWORD = "123";
 
     public static Connection getDBConnection() {
 

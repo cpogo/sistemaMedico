@@ -5,12 +5,15 @@
  */
 package fichaMedica;
 
+import ConexionFichaMedica.registrarFicha_Conexion;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 
 //===
 import java.sql.*;
 import conexiondb.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,6 +21,7 @@ import conexiondb.*;
  */
 public class registroFichaForm extends javax.swing.JFrame {
 
+    java.sql.Date dateserver;
     /**
      * Creates new form registroFichaForm
      */
@@ -46,40 +50,37 @@ public class registroFichaForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         lblCedula = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtCodigoPaciente = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        lblCodigo = new javax.swing.JLabel();
-        btnConsultarCodigo = new javax.swing.JButton();
+        txtRegistro = new javax.swing.JButton();
+        txtFreqResp = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        txtFreqCard = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        txtPresionArterialDias = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        txtPresionArterialSis = new javax.swing.JTextField();
         lblNombrePaciente = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtEstatura = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txtPeso = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        txtPresionArterialSis = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        txtPresionArterialDias = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        txtFreqCard = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
-        txtFreqResp = new javax.swing.JTextField();
-        txtRegistro = new javax.swing.JButton();
-        txtMes = new javax.swing.JTextField();
-        txtDia = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        txtAño = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        btnConsultarCodigo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(254, 254, 254));
+
         lblCedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel1.setFont(new java.awt.Font("WenQuanYi Micro Hei", 0, 24)); // NOI18N
+        jLabel1.setText("Nueva Ficha Médica");
 
         jLabel8.setText("Código del paciente:");
 
@@ -90,19 +91,68 @@ public class registroFichaForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("WenQuanYi Micro Hei", 0, 24)); // NOI18N
-        jLabel1.setText("Nueva Ficha Médica");
-
-        jLabel2.setText("Código de la ficha:");
-
-        jLabel6.setText("Nombre del paciente:");
-
-        lblCodigo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        btnConsultarCodigo.setText("Consultar");
-        btnConsultarCodigo.addActionListener(new java.awt.event.ActionListener() {
+        txtRegistro.setBackground(new java.awt.Color(75, 75, 253));
+        txtRegistro.setForeground(new java.awt.Color(254, 254, 254));
+        txtRegistro.setText("Registrar Ficha Médica");
+        txtRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultarCodigoActionPerformed(evt);
+                txtRegistroActionPerformed(evt);
+            }
+        });
+
+        txtFreqResp.setBackground(new java.awt.Color(254, 254, 254));
+        txtFreqResp.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtFreqRespFocusLost(evt);
+            }
+        });
+        txtFreqResp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFreqRespKeyReleased(evt);
+            }
+        });
+
+        jLabel17.setText("Frecuencia Respiratoria:");
+
+        txtFreqCard.setBackground(new java.awt.Color(254, 254, 254));
+        txtFreqCard.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtFreqCardFocusLost(evt);
+            }
+        });
+        txtFreqCard.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFreqCardKeyReleased(evt);
+            }
+        });
+
+        jLabel16.setText("Frecuencia cardiaca:");
+
+        jLabel15.setText("Presión Arterial Diastólica:");
+
+        txtPresionArterialDias.setBackground(new java.awt.Color(254, 254, 254));
+        txtPresionArterialDias.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPresionArterialDiasFocusLost(evt);
+            }
+        });
+        txtPresionArterialDias.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPresionArterialDiasKeyReleased(evt);
+            }
+        });
+
+        jLabel14.setText("Presión Arterial Sistólica:");
+
+        txtPresionArterialSis.setBackground(new java.awt.Color(254, 254, 254));
+        txtPresionArterialSis.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPresionArterialSisFocusLost(evt);
+            }
+        });
+        txtPresionArterialSis.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPresionArterialSisKeyReleased(evt);
             }
         });
 
@@ -124,8 +174,6 @@ public class registroFichaForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel12.setText("Fecha de registro:");
-
         jLabel13.setText("Peso:");
 
         txtPeso.setBackground(new java.awt.Color(254, 254, 254));
@@ -140,120 +188,26 @@ public class registroFichaForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel14.setText("Presión Arterial Sistólica:");
+        jLabel6.setText("Nombre del paciente:");
 
-        txtPresionArterialSis.setBackground(new java.awt.Color(254, 254, 254));
-        txtPresionArterialSis.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPresionArterialSisFocusLost(evt);
-            }
-        });
-        txtPresionArterialSis.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtPresionArterialSisKeyReleased(evt);
-            }
-        });
-
-        jLabel15.setText("Presión Arterial Diastólica:");
-
-        txtPresionArterialDias.setBackground(new java.awt.Color(254, 254, 254));
-        txtPresionArterialDias.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPresionArterialDiasFocusLost(evt);
-            }
-        });
-        txtPresionArterialDias.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtPresionArterialDiasKeyReleased(evt);
-            }
-        });
-
-        jLabel16.setText("Frecuencia cardiaca:");
-
-        txtFreqCard.setBackground(new java.awt.Color(254, 254, 254));
-        txtFreqCard.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtFreqCardFocusLost(evt);
-            }
-        });
-        txtFreqCard.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtFreqCardKeyReleased(evt);
-            }
-        });
-
-        jLabel17.setText("Frecuencia Respiratoria:");
-
-        txtFreqResp.setBackground(new java.awt.Color(254, 254, 254));
-        txtFreqResp.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtFreqRespFocusLost(evt);
-            }
-        });
-        txtFreqResp.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtFreqRespKeyReleased(evt);
-            }
-        });
-
-        txtRegistro.setText("Registrar Ficha Médica");
-        txtRegistro.addActionListener(new java.awt.event.ActionListener() {
+        btnConsultarCodigo.setBackground(new java.awt.Color(75, 75, 253));
+        btnConsultarCodigo.setForeground(new java.awt.Color(254, 254, 254));
+        btnConsultarCodigo.setText("Consultar");
+        btnConsultarCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRegistroActionPerformed(evt);
+                btnConsultarCodigoActionPerformed(evt);
             }
         });
 
-        txtMes.setBackground(new java.awt.Color(254, 254, 254));
-        txtMes.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtMesFocusLost(evt);
-            }
-        });
-        txtMes.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtMesKeyReleased(evt);
-            }
-        });
-
-        txtDia.setBackground(new java.awt.Color(254, 254, 254));
-        txtDia.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtDiaFocusLost(evt);
-            }
-        });
-        txtDia.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtDiaKeyReleased(evt);
-            }
-        });
-
-        jLabel4.setText("Día:");
-
-        jLabel5.setText("Mes:");
-
-        jLabel9.setText("Año:");
-
-        txtAño.setBackground(new java.awt.Color(254, 254, 254));
-        txtAño.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtAñoFocusLost(evt);
-            }
-        });
-        txtAño.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtAñoKeyReleased(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel15)
                             .addComponent(jLabel14)
                             .addComponent(jLabel17)
@@ -262,113 +216,82 @@ public class registroFichaForm extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel12))
+                            .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtPresionArterialSis, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtPresionArterialDias, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                                        .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtAño, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap(56, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtRegistro)
-                                        .addGap(45, 45, 45))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtFreqCard, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtEstatura, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtCodigoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnConsultarCodigo))
-                                    .addComponent(txtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFreqResp, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(2, 2, 2)
-                                        .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel5)))
-                                .addContainerGap())))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtPresionArterialSis, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35)
+                                .addComponent(txtRegistro))
+                            .addComponent(txtPresionArterialDias, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFreqCard, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEstatura, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtCodigoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnConsultarCodigo))
+                            .addComponent(txtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFreqResp, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel1))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCodigo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(36, 36, 36)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtCodigoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnConsultarCodigo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addComponent(lblNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(lblCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEstatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPresionArterialSis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPresionArterialDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtRegistro)
-                        .addGap(20, 20, 20)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPresionArterialSis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14)
+                    .addComponent(txtRegistro))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPresionArterialDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFreqCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFreqResp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel9)
-                    .addComponent(txtAño))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -399,9 +322,12 @@ public class registroFichaForm extends javax.swing.JFrame {
         String presionDias = txtPresionArterialDias.getText();
         String freqCard = txtFreqCard.getText();
         String freqResp = txtFreqResp.getText();
-        String dia = txtDia.getText();
-        String mes = txtMes.getText();
-        String anio = txtAño.getText();
+
+        try {
+            dateserver = registrarFicha_Conexion.callProcedureGetFechaServidor();
+        } catch (SQLException ex) {
+            Logger.getLogger(registroFichaForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
         MensajeRegistrarFicha = "";
         MensajeRegistrarFicha = MensajeRegistrarFicha1 + MensajeRegistrarFicha2 + MensajeRegistrarFicha3 + MensajeRegistrarFicha4 + MensajeRegistrarFicha5 + MensajeRegistrarFicha6 + MensajeRegistrarFicha7 + MensajeRegistrarFicha8 + MensajeRegistrarFicha9;
 
@@ -465,40 +391,41 @@ public class registroFichaForm extends javax.swing.JFrame {
                 txtFreqResp.setBackground(java.awt.Color.WHITE);
         }
 
-        if (dia.equals("") && MensajeRegistrarFicha7.equals("")){
-            MensajeRegistrarFicha += "El campo día no puede estar vacío\n";
-            txtDia.setBackground(java.awt.Color.PINK);
-        }else{
-            if(!MensajeRegistrarFicha7.equals(""))
-                txtDia.setBackground(java.awt.Color.PINK);
-            else
-                txtDia.setBackground(java.awt.Color.WHITE);
-        }
-
-        if (mes.equals("") && MensajeRegistrarFicha8.equals("")){
-            MensajeRegistrarFicha += "El campo mes no puede estar vacío\n";
-            txtMes.setBackground(java.awt.Color.PINK);
-        }else{
-            if(!MensajeRegistrarFicha8.equals(""))
-                txtMes.setBackground(java.awt.Color.PINK);
-            else
-                txtMes.setBackground(java.awt.Color.WHITE);
-        }
-
-        if (anio.equals("") && MensajeRegistrarFicha9.equals("")){
-            MensajeRegistrarFicha += "El campo año no puede estar vacío\n";
-            txtAño.setBackground(java.awt.Color.PINK);
-        }else{
-            if(!MensajeRegistrarFicha9.equals(""))
-                txtAño.setBackground(java.awt.Color.PINK);
-            else
-                txtAño.setBackground(java.awt.Color.WHITE);
-        }
+//        if (dia.equals("") && MensajeRegistrarFicha7.equals("")){
+//            MensajeRegistrarFicha += "El campo día no puede estar vacío\n";
+//            txtDia.setBackground(java.awt.Color.PINK);
+//        }else{
+//            if(!MensajeRegistrarFicha7.equals(""))
+//                txtDia.setBackground(java.awt.Color.PINK);
+//            else
+//                txtDia.setBackground(java.awt.Color.WHITE);
+//        }
+//
+//        if (mes.equals("") && MensajeRegistrarFicha8.equals("")){
+//            MensajeRegistrarFicha += "El campo mes no puede estar vacío\n";
+//            txtMes.setBackground(java.awt.Color.PINK);
+//        }else{
+//            if(!MensajeRegistrarFicha8.equals(""))
+//                txtMes.setBackground(java.awt.Color.PINK);
+//            else
+//                txtMes.setBackground(java.awt.Color.WHITE);
+//        }
+//
+//        if (anio.equals("") && MensajeRegistrarFicha9.equals("")){
+//            MensajeRegistrarFicha += "El campo año no puede estar vacío\n";
+//            txtAño.setBackground(java.awt.Color.PINK);
+//        }else{
+//            if(!MensajeRegistrarFicha9.equals(""))
+//                txtAño.setBackground(java.awt.Color.PINK);
+//            else
+//                txtAño.setBackground(java.awt.Color.WHITE);
+      //  }
 
         if(MensajeRegistrarFicha.equals("")){
 //==
 			registrarFicha();
             JOptionPane.showMessageDialog(rootPane, "Registro exitoso", "Mensaje", 1);
+            this.dispose();            
         }else
             JOptionPane.showMessageDialog(rootPane, MensajeRegistrarFicha, "Advertencia", 2);
 
@@ -606,68 +533,6 @@ public class registroFichaForm extends javax.swing.JFrame {
 //        {}
     }//GEN-LAST:event_txtFreqRespKeyReleased
 
-    private void txtMesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMesKeyReleased
-//        String mes = txtMes.getText();
-//
-//        if(!esNumero(mes))
-//        {
-//            txtMes.setText("");
-//        }
-//        try
-//        {
-//            int mesInt = Integer.parseInt(mes);
-//            if(mesInt <1 || mesInt>12)
-//            txtMes.setText("");
-//
-//        }catch(Exception e)
-//        {
-//
-//        }
-    }//GEN-LAST:event_txtMesKeyReleased
-
-    private void txtDiaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiaKeyReleased
-//        String dia = txtDia.getText();
-//
-//        if(!esNumero(dia))
-//        {
-//            txtDia.setText("");
-//        }
-//        try
-//        {
-//            int diaInt = Integer.parseInt(dia);
-//            if(diaInt <1 || diaInt>31)
-//            txtDia.setText("");
-//
-//        }catch(Exception e)
-//        {
-//
-//        }
-    }//GEN-LAST:event_txtDiaKeyReleased
-
-    private void txtAñoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAñoKeyReleased
-//        Calendar actual = Calendar.getInstance();
-//        int añoActual = actual.get(Calendar.YEAR);
-//        String año = txtAño.getText();
-//
-//        if(!esNumero(año))
-//        {
-//            txtAño.setText("");
-//        }
-//        try
-//        {
-//
-//            int añoInt = Integer.parseInt(año);
-//            if(añoActual > añoInt)
-//                txtAño.setText("");
-//            if(añoInt <0|| añoInt>2020)
-//            txtAño.setText("");
-//
-//        }catch(Exception e)
-//        {
-//
-//        }
-    }//GEN-LAST:event_txtAñoKeyReleased
-
     private void txtEstaturaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEstaturaFocusLost
         String estatura = txtEstatura.getText();
         MensajeRegistrarFicha1 = "";
@@ -770,109 +635,6 @@ public class registroFichaForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtFreqRespFocusLost
 
-    private void txtDiaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiaFocusLost
-        String dia = txtDia.getText();
-        int numdia = 0;
-        String mes = txtMes.getText();
-        String año = txtAño.getText();
-        Calendar actual = Calendar.getInstance();
-        int añoActual = actual.get(Calendar.YEAR);
-        int diaActual = actual.get(Calendar.DAY_OF_MONTH);
-        int mesActual = actual.get(Calendar.MONTH) + 1;
-        MensajeRegistrarFicha7 = "";
-
-        if (dia.equals(""))
-            MensajeRegistrarFicha7 += "El campo día de la fecha de nacimiento no puede estar vacío\n";
-
-        if(!esNumero(dia))
-            MensajeRegistrarFicha7 += "El día no puede contener espacios ni caracteres alfabéticos\n";
-        else{
-            if(!dia.equals("")){
-                numdia = Integer.parseInt(dia);
-                if(numdia < 1 || numdia > 31) // Aquí falta la validación de los meses
-                    MensajeRegistrarFicha7 += "El día solo tiene dígitos entre 1 - 31\n";// Aquí falta la validación de los meses
-            }
-        }
-
-        if(!dia.equals("") && !mes.equals("") && !año.equals("") && esNumero(mes) && esNumero(año) && esNumero(dia) && (Integer.parseInt(mes)<12 && Integer.parseInt(mes)>0)){
-            if(Integer.parseInt(año) == añoActual && Integer.parseInt(mes) == mesActual){
-                if(Integer.parseInt(dia) < diaActual){
-                    MensajeRegistrarFicha7 += "Día inválido: Se ha escogido un día anterior al actual\n";
-                }
-            }else if(Integer.parseInt(año) == añoActual && Integer.parseInt(mes) > mesActual){
-                if(Integer.parseInt(dia) < 0 || Integer.parseInt(dia) > 31){
-                    MensajeRegistrarFicha7 += "Día Inválido: Solo puede tomar el valor de 1 - 31\n";
-                }
-            }else if(Integer.parseInt(año) > añoActual){
-                if(Integer.parseInt(dia) < 0 || Integer.parseInt(dia) > 31){
-                    MensajeRegistrarFicha7 += "Día Inválido: Solo puede tomar el valor de 1 - 31\n";
-                }
-            }
-        }
-    }//GEN-LAST:event_txtDiaFocusLost
-
-    private void txtMesFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMesFocusLost
-        String mes = txtMes.getText();
-        String año = txtAño.getText();
-        String dia = txtDia.getText();
-        int nummes = 0;
-        Calendar actual = Calendar.getInstance();
-        int añoActual = actual.get(Calendar.YEAR);
-        int diaActual = actual.get(Calendar.DAY_OF_MONTH);
-        int mesActual = actual.get(Calendar.MONTH) + 1;
-        MensajeRegistrarFicha8 = "";
-
-        if (mes.equals(""))
-            MensajeRegistrarFicha8 += "El campo mes de la fecha de nacimiento no puede estar vacío\n";
-
-        if(!esNumero(mes))
-            MensajeRegistrarFicha8 += "El mes no puede contener espacios ni caracteres alfabéticos\n";
-        else{
-            if(!mes.equals("")){
-                nummes = Integer.parseInt(mes);
-                if(nummes < 1 || nummes > 12)
-                    MensajeRegistrarFicha8 += "El mes solo tiene dígitos entre 1 - 12\n";
-            }
-        }
-
-        if(!año.equals("") && !mes.equals("") && esNumero(año) && esNumero(mes) && (Integer.parseInt(mes)<12 && Integer.parseInt(mes)>0)){
-            if(Integer.parseInt(año) == añoActual) {
-                if(Integer.parseInt(mes) < mesActual){
-                    MensajeRegistrarFicha8 += "Mes inválido: Se ha escogido un mes anterior al actual\n";
-                }
-            }else if(Integer.parseInt(año) > añoActual){
-                if(Integer.parseInt(mes)<1 || Integer.parseInt(mes)>12){
-                    MensajeRegistrarFicha8 += "Mes inválido: Solo puede tomar el valor de 1 - 12l\n";
-                }
-            }
-        }
-    }//GEN-LAST:event_txtMesFocusLost
-
-    private void txtAñoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAñoFocusLost
-        String anio = txtAño.getText();
-        String mes = txtMes.getText();
-        String dia = txtDia.getText();
-        int numanio = 0;
-        Calendar actual = Calendar.getInstance();
-        int añoActual = actual.get(Calendar.YEAR);
-        int diaActual = actual.get(Calendar.DAY_OF_MONTH);
-        int mesActual = actual.get(Calendar.MONTH) + 1;
-        MensajeRegistrarFicha9 = "";
-
-        if (anio.equals(""))
-            MensajeRegistrarFicha9 += "El campo año de la fecha de nacimiento no puede estar vacío\n";
-
-        if(!esNumero(anio))
-            MensajeRegistrarFicha9 += "El año no puede contener espacios ni caracteres alfabéticos\n";
-        else{
-            if(!anio.equals("")){
-                numanio = Integer.parseInt(anio);
-                if(numanio < 1914 || numanio > añoActual)
-                    MensajeRegistrarFicha9 += "Año no válido\n";
-            }
-        }
-    }//GEN-LAST:event_txtAñoFocusLost
-
     /**
      * @param args the command line arguments
      */
@@ -911,30 +673,22 @@ public class registroFichaForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConsultarCodigo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCedula;
-    private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblNombrePaciente;
-    private javax.swing.JTextField txtAño;
     private javax.swing.JTextField txtCodigoPaciente;
-    private javax.swing.JTextField txtDia;
     private javax.swing.JTextField txtEstatura;
     private javax.swing.JTextField txtFreqCard;
     private javax.swing.JTextField txtFreqResp;
-    private javax.swing.JTextField txtMes;
     private javax.swing.JTextField txtPeso;
     private javax.swing.JTextField txtPresionArterialDias;
     private javax.swing.JTextField txtPresionArterialSis;
@@ -1004,7 +758,6 @@ public class registroFichaForm extends javax.swing.JFrame {
 
 	public boolean registrarFicha(){
 		boolean valido = false;
-		int codigo = 0;
 
 
 		Connection conn = null;
@@ -1013,7 +766,7 @@ public class registroFichaForm extends javax.swing.JFrame {
 		try{
 		conn = conexiondb.getDBConnection();
 
-		String sql = "{call sp_ficha_medica_insert_cedula(?,?,?,?,?,?,?,?,?)}";
+		String sql = "{call sp_ficha_medica_insert_cedula(?,?,?,?,?,?,?,?)}";
 		stmt = conn.prepareCall(sql);
 		stmt.setString(1, this.lblCedula.getText());
 		stmt.setString(2, this.txtEstatura.getText());
@@ -1022,12 +775,23 @@ public class registroFichaForm extends javax.swing.JFrame {
 		stmt.setString(5, this.txtPresionArterialDias.getText());
 		stmt.setString(6, this.txtFreqCard.getText());
 		stmt.setString(7, this.txtFreqResp.getText());
-		stmt.setString(8, this.txtAño.getText() + "-" + this.txtMes.getText() + "-" + this.txtDia.getText());
-		stmt.registerOutParameter(9, java.sql.Types.INTEGER);
-		valido = stmt.execute();
-		//valido = true;
-		codigo = stmt.getInt(9);
-		this.lblCodigo.setText("" + codigo);
+		stmt.setDate(8, dateserver);
+		stmt.execute();
+
+		valido = true;
+
+//		ResultSet rs = stmt.getResultSet();
+//		valido = rs.next();
+//		if(valido){
+//			this.lblNombrePaciente.setText(rs.getString("nombre") + " " + rs.getString("apellido"));
+//			this.lblCedula.setText(rs.getString("cedula"));
+//			//this.lblCodigo.setText(rs.getString("ficha"));
+//		}else{
+//			this.lblNombrePaciente.setText("");
+//			this.lblCedula.setText("");
+//			//this.lblCodigo.setText("");
+//		}
+//		rs.close();
 
 		stmt.close();
 		conn.close();

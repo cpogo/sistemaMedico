@@ -36,7 +36,6 @@ public class consultaFichaForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lblFechaRegistro = new javax.swing.JLabel();
         lblFreqResp = new javax.swing.JLabel();
-        lblCedula = new javax.swing.JLabel();
         btnConsultarCodigo = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         txtCodigoPaciente = new javax.swing.JTextField();
@@ -50,7 +49,6 @@ public class consultaFichaForm extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         lblNombrePaciente = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         lblEstatura = new javax.swing.JLabel();
@@ -67,8 +65,6 @@ public class consultaFichaForm extends javax.swing.JFrame {
 
         lblFreqResp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lblCedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
         btnConsultarCodigo.setBackground(new java.awt.Color(75, 75, 253));
         btnConsultarCodigo.setFont(new java.awt.Font("WenQuanYi Micro Hei", 1, 13)); // NOI18N
         btnConsultarCodigo.setForeground(new java.awt.Color(254, 254, 254));
@@ -79,7 +75,7 @@ public class consultaFichaForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setText("Código del paciente:");
+        jLabel8.setText("Cédula del paciente:");
 
         txtCodigoPaciente.setBackground(new java.awt.Color(254, 254, 254));
         txtCodigoPaciente.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -110,8 +106,6 @@ public class consultaFichaForm extends javax.swing.JFrame {
 
         lblNombrePaciente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel7.setText("Cédula del paciente:");
-
         jLabel12.setText("Fecha de registro:");
 
         jLabel13.setText("Peso:");
@@ -139,7 +133,6 @@ public class consultaFichaForm extends javax.swing.JFrame {
                     .addComponent(jLabel16)
                     .addComponent(jLabel13)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel7)
                     .addComponent(jLabel3)
                     .addComponent(jLabel8)
                     .addComponent(jLabel12)
@@ -147,7 +140,6 @@ public class consultaFichaForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEstatura, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -168,7 +160,7 @@ public class consultaFichaForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCodigoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnConsultarCodigo)
@@ -181,11 +173,7 @@ public class consultaFichaForm extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel6)
                                     .addComponent(lblNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(lblCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(29, 29, 29)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2))
@@ -317,10 +305,8 @@ public class consultaFichaForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblCedula;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblEstatura;
     private javax.swing.JLabel lblFechaRegistro;
@@ -362,7 +348,7 @@ public class consultaFichaForm extends javax.swing.JFrame {
 		valido = rs.next();
 		if(valido){
 			this.lblNombrePaciente.setText(rs.getString("nombre"));
-			this.lblCedula.setText(rs.getString("cedula"));
+			//this.lblCedula.setText(rs.getString("cedula"));
 			this.lblCodigo.setText(rs.getString("ficha"));
 			this.lblEstatura.setText(rs.getString("estatura"));
 			this.lblPeso.setText(rs.getString("peso"));
@@ -373,7 +359,7 @@ public class consultaFichaForm extends javax.swing.JFrame {
 			this.lblFechaRegistro.setText(rs.getString("fecha"));
 		}else{
 			this.lblNombrePaciente.setText("");
-			this.lblCedula.setText("");
+			//this.lblCedula.setText("");
 			this.lblCodigo.setText("");
 			this.lblEstatura.setText("");
 			this.lblPeso.setText("");
