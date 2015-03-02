@@ -1004,6 +1004,7 @@ public class registroFichaForm extends javax.swing.JFrame {
 
 	public boolean registrarFicha(){
 		boolean valido = false;
+		int codigo = 0;
 
 
 		Connection conn = null;
@@ -1012,32 +1013,29 @@ public class registroFichaForm extends javax.swing.JFrame {
 		try{
 		conn = conexiondb.getDBConnection();
 
-		String sql = "{call sp_ficha_medica_insert_cedula(?,?,?,?,?,?,?,?)}";
+		String sql = "{call sp_ficha_medica_insert_cedula(?,?,?,?,?,?,?,?,?)}";
 		stmt = conn.prepareCall(sql);
 		stmt.setString(1, this.lblCedula.getText());
+		System.out.println(this.lblCedula.getText());
 		stmt.setString(2, this.txtEstatura.getText());
+		System.out.println(this.txtEstatura.getText());
 		stmt.setString(3, this.txtPeso.getText());
+		System.out.println(this.txtPeso.getText());
 		stmt.setString(4, this.txtPresionArterialSis.getText());
+		System.out.println(this.txtPresionArterialSis.getText());
 		stmt.setString(5, this.txtPresionArterialDias.getText());
+		System.out.println(this.txtPresionArterialDias.getText());
 		stmt.setString(6, this.txtFreqCard.getText());
+		System.out.println(this.txtFreqCard.getText());
 		stmt.setString(7, this.txtFreqResp.getText());
+		System.out.println(this.txtFreqResp.getText());
 		stmt.setString(8, this.txtAño.getText() + "-" + this.txtMes.getText() + "-" + this.txtDia.getText());
-		stmt.execute();
-
-		valido = true;
-
-//		ResultSet rs = stmt.getResultSet();
-//		valido = rs.next();
-//		if(valido){
-//			this.lblNombrePaciente.setText(rs.getString("nombre") + " " + rs.getString("apellido"));
-//			this.lblCedula.setText(rs.getString("cedula"));
-//			//this.lblCodigo.setText(rs.getString("ficha"));
-//		}else{
-//			this.lblNombrePaciente.setText("");
-//			this.lblCedula.setText("");
-//			//this.lblCodigo.setText("");
-//		}
-//		rs.close();
+		System.out.println(this.txtAño.getText() + "-" + this.txtMes.getText() + "-" + this.txtDia.getText());
+		stmt.registerOutParameter(9, java.sql.Types.INTEGER);
+		valido = stmt.execute();
+		//valido = true;
+		codigo = stmt.getInt(9);
+		this.lblCodigo.setText("" + codigo);
 
 		stmt.close();
 		conn.close();
